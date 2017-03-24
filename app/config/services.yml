@@ -4,9 +4,6 @@ parameters:
 #    parameter_name: value
 
 services:
-  controller.query:
-    class: AppBundle\Controller\QueryController
-    arguments: ['@=service("doctrine")']
   controller.todo:
     class: AppBundle\Controller\TodoController
     arguments: ['@=service("doctrine")']
