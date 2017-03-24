@@ -7,6 +7,9 @@ services:
   controller.query:
     class: AppBundle\Controller\QueryController
     arguments: ['@=service("doctrine")']
+  controller.todo:
+    class: AppBundle\Controller\TodoController
+    arguments: ['@=service("doctrine")']
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
