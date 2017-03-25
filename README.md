@@ -5,7 +5,7 @@ A Symfony project created on February 14, 2017, 3:48 pm.
 
 
 Create database
-`php bin/console doctrine:database:create`
+`php bin/console doctrine:database:create --if-not-exists`
 
 Create new entity
 `php bin/console generate:doctrine:entity`
