@@ -127,7 +127,6 @@ class TodoController
             return $response;
         }
         $todo = $this->setTodo($todo, $request);
-
         $registry = $this->registry->getManager();
         $registry->persist($todo);
         $registry->flush();
@@ -141,7 +140,7 @@ class TodoController
 
     private function setTodo(Todo $todo, Request $request) {
         $request->request->has('task') && $todo->setTask($request->get('task'));
-        $todo->setIsComplete(false);
+        $todo->setIsComplete($request->get('is_complete'));
         return $todo;
     }
 }

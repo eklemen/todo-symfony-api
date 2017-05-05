@@ -33,8 +33,30 @@ export function todoView(state = initialState, action) {
 				data: [],
 				error: action.payload
 			}
-		case 'TEST':
-			return {...state}
+//////////////////// Toggle complete
+		case "TOGGLE_ITEM":
+			return {
+				...state,
+				data: action.payload
+			}
+		case "TOGGLE_COMPLETE_PENDING":
+			return {
+				...state,
+				data: [...state.data]
+			}
+
+		case "TOGGLE_COMPLETE_FULFILLED":
+			return {
+				...state
+			}
+		case "TOGGLE_COMPLETE_REJECTED":
+			return {
+				...state,
+				fetching: false,
+				fetched: true,
+				data: [],
+				error: action.payload
+			}
 		default:
 			return state
 	}
