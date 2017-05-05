@@ -39,12 +39,6 @@ export function todoView(state = initialState, action) {
 				...state,
 				data: action.payload
 			}
-		case "TOGGLE_COMPLETE_PENDING":
-			return {
-				...state,
-				data: [...state.data]
-			}
-
 		case "TOGGLE_COMPLETE_FULFILLED":
 			return {
 				...state
@@ -54,7 +48,26 @@ export function todoView(state = initialState, action) {
 				...state,
 				fetching: false,
 				fetched: true,
-				data: [],
+				data: state.data,
+				error: action.payload
+			}
+
+///////////////////// Delete item
+		case "DELETE_ITEM":
+		return {
+			...state,
+			data: action.payload
+		}
+		case "DELETE_ITEM_FULFILLED":
+			return {
+				...state
+			}
+		case "DELETE_ITEM_REJECTED":
+			return {
+				...state,
+				fetching: false,
+				fetched: true,
+				data: state.data,
 				error: action.payload
 			}
 		default:

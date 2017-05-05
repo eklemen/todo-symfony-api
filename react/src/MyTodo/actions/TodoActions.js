@@ -22,7 +22,7 @@ export function getTodos(){
 
 export function toggleComplete(todo, todos){
 	return dispatch => {
-		// dispatch({type: "TOGGLE_COMPLETE_PENDING"});
+		dispatch({type: "TOGGLE_COMPLETE_PENDING"});
 		const status = {is_complete: !todo.is_complete}
 		axios.put(`http://localhost:8000/api/todos/${todo.id}`, status)
 			.then( response => {
@@ -44,6 +44,28 @@ export function toggleComplete(todo, todos){
 						type: 'TOGGLE_COMPLETE_REJECTED',
 						payload: error
 					});
+			})
+	}
+}
+
+export function deleteItem(todo, todos){
+	return dispatch => {
+		axios.delete(`http://localhost:8000/api/todos/${todo.id}`)
+			.then( response => {
+				const updated = todos.filter( item => {
+					return item.id !== todo.id;
+				});
+				dispatch({
+					type: 'DELETE_ITEM',
+					payload: updated
+				});
+				dispatch({type: "DELETE_ITEM_FULFILLED"});
+			})
+			.catch( error => {
+				dispatch({
+					type: 'DELETE_ITEM_REJECTED',
+					payload: error
+				});
 			})
 	}
 }

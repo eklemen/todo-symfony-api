@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import {getTodos, toggleComplete} from './actions/TodoActions';
+import {getTodos, toggleComplete, deleteItem} from './actions/TodoActions';
 import {TodoItem, Footer} from './components/'
 export class MyTodo extends Component {
 
@@ -16,7 +16,8 @@ export class MyTodo extends Component {
             return (<TodoItem task={todo.task} 
                               isComplete={todo.is_complete} 
                               key={todo.id} 
-                              toggleComplete={() => dispatch(toggleComplete(todo, todos)) } />);
+                              toggleComplete={() => dispatch(toggleComplete(todo, todos)) }
+                              deleteItem={() => dispatch(deleteItem(todo, todos))} />);
         });
         return (
             <div>

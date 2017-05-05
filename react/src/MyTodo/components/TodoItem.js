@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export class TodoItem extends Component {
 
     render() {
-    	const { task, isComplete, toggleComplete } = this.props;
+    	const { task, isComplete, toggleComplete, deleteItem } = this.props;
         const complete = isComplete ? "completed" : "";
         console.log(complete);
         return (
@@ -14,7 +14,7 @@ export class TodoItem extends Component {
                            checked={isComplete}
                            onChange={toggleComplete} />
                     <label>{task}</label>
-                    <button className="destroy"></button>
+                    <button className="destroy" onClick={deleteItem}></button>
                 </div>
                 <input className="edit" 
                        value="Create a TodoMVC template"
