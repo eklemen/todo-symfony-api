@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import {getTodos, toggleComplete, deleteItem} from './actions/TodoActions';
+import {getTodos, toggleComplete, deleteItem, addItem, updateUserInput, submitTodo} from './actions/TodoActions';
 import {TodoItem, Footer} from './components/'
 export class MyTodo extends Component {
 
@@ -10,7 +10,7 @@ export class MyTodo extends Component {
     }
 
     render() {
-    	const {todos=[], dispatch} = this.props;
+    	const {todos=[], dispatch, userInput} = this.props;
     	console.log(todos)
         const todoItems = todos.map( todo => {
             return (<TodoItem task={todo.task} 
@@ -24,7 +24,13 @@ export class MyTodo extends Component {
                 <section className="todoapp">
                     <header className="header">
                         <h1>todos</h1>
-                        <input className="new-todo" placeholder="What needs to be done?" autoFocus />
+                        <form onSubmit={ () => dispatch(submitTodo(userInput)) }>
+                            <input className="new-todo" 
+                                   placeholder="What needs to be done?"
+                                   onChange={ e => dispatch(updateUserInput(e)) }
+                                   value={userInput} />
+                            <button type="submit"></button>
+                        </form>
                     </header>
                     <section className="main">
                         <input className="toggle-all" type="checkbox"/>
@@ -42,7 +48,8 @@ export class MyTodo extends Component {
 
 export const mapStateToProps = state => {
 	return {
-		todos: state.Todos.todoView.data
+		todos: state.Todos.todoView.data,
+        userInput: state.Todos.todoView.userInput
 	}
 }
 

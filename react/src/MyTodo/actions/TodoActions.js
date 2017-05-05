@@ -69,3 +69,43 @@ export function deleteItem(todo, todos){
 			})
 	}
 }
+
+export function updateUserInput(event){
+	return dispatch => {
+		let value = event.target.value;
+		dispatch({
+			type: "UPDATE_USER_INPUT",
+			payload: value
+		});
+	}
+}
+
+export function submitTodo(userInput){
+	return dispatch => {
+		const newTodo = {
+			task: userInput,
+			is_complete: false
+		};
+		axios.post(`http://localhost:8000/api/todos/`, newTodo)
+			.then(response => {
+				let id = response.data.id;
+				newTodo.id = id;
+				dispatch({
+					type: "SUBMIT_TODO_FULFILLED",
+					payload: newTodo
+				});
+			})
+			.catch( error => {
+				dispatch({type: "SUBMIT_TODO_REJECTED"});
+			})
+	}
+}
+
+export function addItem(newTodo){
+	return dispatch => {
+		axios.post(`http://localhost:8000/api/todos/`, newTodo)
+			.then( response => {
+
+			})
+	}
+}

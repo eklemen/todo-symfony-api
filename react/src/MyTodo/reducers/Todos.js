@@ -2,7 +2,8 @@ const initialState = {
 	fetching: false,
 	fetched: false,
 	error: null,
-	data: []
+	data: [],
+	userInput: ""
 }
 
 export function todoView(state = initialState, action) {
@@ -54,13 +55,33 @@ export function todoView(state = initialState, action) {
 
 ///////////////////// Delete item
 		case "DELETE_ITEM":
-		return {
-			...state,
-			data: action.payload
-		}
+			return {
+				...state,
+				data: action.payload
+			}
 		case "DELETE_ITEM_FULFILLED":
 			return {
 				...state
+			}
+		case "DELETE_ITEM_REJECTED":
+			return {
+				...state,
+				fetching: false,
+				fetched: true,
+				data: state.data,
+				error: action.payload
+			}
+		case "UPDATE_USER_INPUT":
+			return {
+				...state,
+				userInput: action.payload
+			}
+
+		case "SUBMIT_TODO_FULFILLED":
+			return {
+				...state,
+				data: [...state.data, action.payload],
+				userInput: ""
 			}
 		case "DELETE_ITEM_REJECTED":
 			return {

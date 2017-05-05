@@ -5,7 +5,6 @@ export class TodoItem extends Component {
     render() {
     	const { task, isComplete, toggleComplete, deleteItem } = this.props;
         const complete = isComplete ? "completed" : "";
-        console.log(complete);
         return (
             <li className={complete}>
                 <div className="view">
